@@ -16,6 +16,10 @@ inline double CalArea(double radius)
     return PI * radius * radius;
 }
 
+double CalAreaWithoutInline (double radius)
+{
+    return PI * radius * radius;
+}
 int main()
 {   
     //与内联函数思路类似的就是Lambda表达式。C++中的Lambda表达式与C#中的Lambda表达式略有不同。
@@ -24,5 +28,8 @@ int main()
     cout << calarea(2) << endl;
 
     cout << CalArea(2) << endl;   
+
+    //话是这么说，但怎么我感觉看编译语句，使用了“inline”的函数“CalArea”和没使用“inline”的“CalAreaWithoutInline”的代码是一样的呢？
+    cout << CalAreaWithoutInline(2) << endl;
 }
 
