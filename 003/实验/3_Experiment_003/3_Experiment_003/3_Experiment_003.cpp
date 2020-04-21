@@ -10,6 +10,6 @@ int main()
     cout << "Please input 2 integer number:\n";
     int x, y;
     cin >> x >> y;
-    cout << "power(" << x << ", " << y << ") = " << pow(x, y) << "\n";
+    cout << "pow(" << x << ", " << y << ") = " << pow(x, y) << "\n";
 }
 
