@@ -124,7 +124,7 @@ double Max1(double a, double b, double c)
 	return Max1(Max1(a, b), c);
 }
 
-//这个函数实际没用到。
+//这个函数实际没用到。因为要实现输入未知数量的参数并将其储存，我暂时不知道在c++中有什么快捷的做法。
 int Max1(initializer_list<int> ls)
 {
 	int x = *(ls.begin());
