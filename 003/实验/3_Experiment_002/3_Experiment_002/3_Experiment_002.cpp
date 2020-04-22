@@ -125,6 +125,7 @@ double Max1(double a, double b, double c)
 }
 
 //这个函数实际没用到。因为要实现输入未知数量的参数并将其储存，我暂时不知道在c++中有什么快捷的做法。
+//同时对这个initializer_list我也还是不太了解，并不知道到底要怎么将数组转换成它。
 int Max1(initializer_list<int> ls)
 {
 	int x = *(ls.begin());
