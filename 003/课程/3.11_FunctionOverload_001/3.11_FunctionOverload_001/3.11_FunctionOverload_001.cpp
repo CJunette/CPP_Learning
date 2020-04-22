@@ -28,4 +28,12 @@ int main()
     cout << "Please input 2 real number:\n";
     cin >> c >> d;
     cout << "The sum of square is " << sumOfSquare(c, d) << ".\n" << endl;
+
+    //下列程序编译器会报错，错误是没有对应的函数重载。
+    //当函数本身限定了形参的数据类型时，传入的实参如果类型与要求不符就会直接报错，而不是进行强制类型转换。
+    /*
+    int e;
+    double f;    
+    sumOfSquare(e, f);
+    */
 }
