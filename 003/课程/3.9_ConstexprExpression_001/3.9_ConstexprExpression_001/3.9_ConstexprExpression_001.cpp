@@ -23,5 +23,10 @@ int main()
     //由此可见constexpr可以在编译期间就直接完成计算。
     int x = 10;
     const int y = x * x;
+    const int z = 2;
+
+    //比较麻烦的一点是，由于constexpr是编译期间就可以求值的，因此不能用一个需要在程序运行中才能得到值的const（如y）去给constexpr赋值。
+    //只能用在定义时就已经确定值的const（如z）去给constexpr赋值。
+    constexpr int b = z;
 }
 
