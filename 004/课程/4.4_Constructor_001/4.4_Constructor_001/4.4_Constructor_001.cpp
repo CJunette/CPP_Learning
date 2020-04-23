@@ -58,7 +58,7 @@ void Clock::setTime(int newH, int newM, int newS)
 }
 
 //这是一种简单的初始化方式。这种简单的赋值语句可以替换在函数体中写“hour = newH;”这样的语句，且效率更高。
-//这种初始化方式似乎只能用在构造器上。
+//这种初始化方式似乎只能用在构造器上，不能用在其他的函数上。
 Clock::Clock(int newH, int newM, int newS) :
     hour(newH), minute(newM), second(newS)
 {};
