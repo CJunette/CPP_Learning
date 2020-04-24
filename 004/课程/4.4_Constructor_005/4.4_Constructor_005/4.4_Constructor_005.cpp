@@ -46,16 +46,16 @@ Point::Point(Point &pnt)
     y = pnt.y;
 }
 
-Point::Point(Point &&pnt)
-{
-    x = pnt.x;
-    y = pnt.y;    
-}
-
-//这种类似的委托构造函数结构也可以用在复制构造函数上。
-Point::Point(const Point &pnt):
+Point::Point(Point &&pnt) :
     Point(pnt)
 {}
+
+//这种类似的委托构造函数结构也可以用在复制构造函数上。
+Point::Point(const Point &pnt)    
+{
+    x = pnt.x;
+    y = pnt.y;
+}
 
 Point func()
 {
@@ -98,6 +98,9 @@ int main()
 
     //-----------3-----------
     //这里就是实际函数运行的部分，也就是说之前问题发生的部位。
+
+    //这里之所以在跳出func()之后没有再次执行复制构造函数，可能是因为本身执行复制构造函数的目的就是为了得到一个用于复制的右值对象。
+    //而现在范围的对象本身就是一个右值，因此也就没有必要在这样做一次了。
     Point a = func();
     cout << a.getX() << endl;
 }
