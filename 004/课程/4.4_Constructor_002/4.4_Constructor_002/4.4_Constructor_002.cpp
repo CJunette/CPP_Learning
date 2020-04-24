@@ -60,6 +60,9 @@ int main()
     myClock1.showTime();
     Clock myClock2;
     myClock2.showTime();
+
+    //注意，创建对象不要写成下面这种形式！编译器不会报错，但在运行时程序会直接跳过这行代码。
+    Clock myClock3();
 }
 
 
