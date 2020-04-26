@@ -21,17 +21,18 @@ class ExamInfo
 
     void showInfo()
     {
+        cout << course << ": ";
         switch (mode)
         {
             case ExamInfo::GRADE:
-                cout << course << ": " << grade << endl;
+                cout << grade << endl;
                 break;
             case ExamInfo::PASS:
                 //注意这里这个三目运算要用括号。
-                cout << course << ": " << (pass ? "Pass" : "Fail") << endl;
+                cout << (pass ? "Pass" : "Fail") << endl;
                 break;
             case ExamInfo::PERCENT:
-                cout << course << ": " << percent << endl;
+                cout << percent << endl;
                 break;
             default:
                 break;
