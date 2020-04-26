@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B57AEE1B-9A66-432F-BCB3-E94181CE3798}</ProjectGuid>
+    <ProjectGuid>{D145CBDA-CB5D-46AD-9F6C-744BA2D4E186}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My48Union002cpp</RootNamespace>
+    <RootNamespace>My48Union002</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="4.8_Union_002.cpp.cpp" />
+    <ClCompile Include="4.8_Union_002.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
