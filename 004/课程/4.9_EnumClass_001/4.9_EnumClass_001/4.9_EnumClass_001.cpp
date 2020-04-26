@@ -5,6 +5,9 @@
 using namespace std;
 
 //使用枚举类型相较于使用枚举，有以下好处。
+//1.强作用域，即任何情况下使用enum类的值都必须加类名，如下面的TypeInt::LIGHT。如过是普通enum的话，直接使用LIGHT即可，但那样做可能会造成不同名称的冲突。
+//2.转换限制，即现在不能隐式地将枚举类型转换成整数。
+//3.可以指定底层类型。
 
 //枚举类定义还可以定义底层类型名（基类），默认的底层类型是int。
 enum class TypeInt {GENERAL, LIGHT, MEDIUM, HEAVY};
