@@ -14,6 +14,8 @@ enum class TypeInt {GENERAL, LIGHT, MEDIUM, HEAVY};
 //如果用char为底层类型，在没有给默认初始值的情况下，应该是从ascii表的第0位开始的。（如果有8个元素，第8个元素就会对应输出ascii第8位的“响铃”）
 enum class TypeChar : char {GENERAL = 'A', LIGHT, MEDIUM, HEAVY};
 
+enum class Side{LEFT, RIGHT};
+enum class Judge{WRONG, RIGHT};
 int main()
 {
     TypeInt tpit(TypeInt::LIGHT);
@@ -22,5 +24,12 @@ int main()
     //注意这里要进行一下类型转换才能正常输出。
     cout << static_cast<int>(tpit) << endl;
     cout << static_cast<char>(tpch) << endl;
+
+    Side s = Side::RIGHT;
+    Judge j = Judge::RIGHT;
+    //由于枚举类型不能隐式地转换成整型，因此下面这行代码会因为将两个不同类型的对象进行比较而直接报错。
+    /*
+    cout << (s == j) << endl;
+    */
 }
 
