@@ -23,6 +23,9 @@ class CPU
     const CPU_Rank getRank() { return rank; }
     const double getFrequency() { return frequency; }
     const double getVoltage() { return voltage; }
+    void setRank(CPU_Rank r) { rank = r; }
+    void setFrequency(double f) { frequency = f; }
+    void setVoltage(double v) { voltage = v; }
 
     void run()
     {
