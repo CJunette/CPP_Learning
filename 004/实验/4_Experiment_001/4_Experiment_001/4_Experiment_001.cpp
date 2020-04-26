@@ -19,6 +19,7 @@ class CPU
         cout << "Destroy a CPU.\n";
     }
 
+    //？我不是特别清楚为什么这里要加const来修饰这些方法。感觉加不加没有什么大变化。
     const CPU_Rank getRank() { return rank; }
     const double getFrequency() { return frequency; }
     const double getVoltage() { return voltage; }
