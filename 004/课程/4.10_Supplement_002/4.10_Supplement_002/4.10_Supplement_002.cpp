@@ -28,13 +28,12 @@ class SavingAccount
     SavingAccount(int i, int date, double r);
     double getRate() { return rate; }
     double getBalance() { return balance; }
+    //这里我本来想写“void settle(int date, double newrate = rate);”这样的形式，因为结息很有可能是因为有利率调整所以才需要进行。
+    //但似乎类成员不能成为类函数成员的默认参数。只有静态成员可以作为类函数成员的默认参数。
     void settle(int date);
     void deposit(int date, double amount);
     void withdraw(int date, double amount);
     void show();
-    
-
-
 };
 
 SavingAccount::SavingAccount(int date, int i, double r) :
