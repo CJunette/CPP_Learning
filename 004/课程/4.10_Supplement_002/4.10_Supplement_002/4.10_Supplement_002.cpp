@@ -37,7 +37,7 @@ class SavingAccount
 
 };
 
-SavingAccount::SavingAccount(int date, int i, double r) :
+SavingAccount::SavingAccount(int date, int i, double r):
     id(i), lastDate(date), rate(r)
 {
     balance = 0;
