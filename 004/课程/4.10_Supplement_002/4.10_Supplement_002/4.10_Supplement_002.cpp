@@ -57,6 +57,14 @@ void SavingAccount::deposit(int date, double amount)
 
 void SavingAccount::withdraw(int date, double amount)
 {
+    //下面这行代码的原本目的是先计息，看迄今为止的本息够不够。
+    //但这么做似乎会出现一些利息上的小问题。如第一期计息0.007，第二期计息0.007，四舍五入以后就是第一期0.01，第二期0.01，合计0.02.
+    //而如果说是单期计息的话，就是一共0.014，四舍五入以后合计0.01。
+    /*
+    accumulate(date);
+    settle(date);
+    */
+
     if (amount > balance)
     {
         cout << "Warning! You don't have enough money!!\n";
@@ -81,7 +89,7 @@ int main()
 
     sa0.deposit(5, 5000);
     sa1.deposit(25, 10000);
-    sa0.deposit(45, 5500);
+    sa0.deposit(45, 5500);    
     sa1.withdraw(60, 4000);
 
     sa0.settle(90);
