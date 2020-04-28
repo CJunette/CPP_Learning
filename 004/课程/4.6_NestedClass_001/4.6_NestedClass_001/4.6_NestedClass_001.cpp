@@ -21,7 +21,7 @@ class Point
     {
         x = pnt.x;
         y = pnt.y;
-        cout << "Calling point copy constructor.\n";
+        cout << "Calling Point copy constructor.\n";
     }
 
     int getX()
@@ -67,13 +67,13 @@ class Line
         p2 = b;
         */
         length = 0;
-        cout << "Calling line constructor.\n";
+        cout << "Calling Line constructor.\n";
     }
     
     Line(const Line &line) :
         p1(line.p1), p2(line.p2), length(line.length)
     {
-        cout << "Calling line copy constructor.\n";
+        cout << "Calling Line copy constructor.\n";
     }
 
     double getLength()
