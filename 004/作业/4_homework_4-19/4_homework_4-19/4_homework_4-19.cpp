@@ -70,9 +70,9 @@ class CPU
     }
 
     private:
-    //这里可能是编译器的原因，必须把位数设置成正常值+1，才能正常容纳所需的样本。
-    //如clockFrequency，实际能表示的整数是-(2^12)~(2^12)-1。ByteLength实际能表示的状态是2^1种。
+    //注意，这里在不写unsigned的情况下，必须要13位才能保证3000能被包含在其中。范围是-(2^12)~(2^12)-1
     int clockFrequency : 13;
+    //对于enum类型，有几种情况这里的数字就写几。这里和书上的说法不同，可能是C++版本不同造成的，也可能是编译环境不同造成的。
     ByteLength byteLength : 2;
     Core core : 3;
     HyperThreading hyperThreading : 2;
