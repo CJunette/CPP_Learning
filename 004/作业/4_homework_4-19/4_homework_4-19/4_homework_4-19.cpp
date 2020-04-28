@@ -71,8 +71,9 @@ class CPU
 
     private:
     //注意，这里在不写unsigned的情况下，必须要13位才能保证3000能被包含在其中。范围是-(2^12)~(2^12)-1
+    //所以最好能用unsigned的地方还是用unsigned。
     int clockFrequency : 13;
-    //对于enum类型，有几种情况这里的数字就写几。这里和书上的说法不同，可能是C++版本不同造成的，也可能是编译环境不同造成的。
+    //对于enum类型，有几种情况这里的数字就写几。这里和书上的说法不同，可能是C++版本不同造成的，也可能是编译环境不同造成的。另外，练习册上的答案也是按有几种情况数字就写几的，原因不明。
     ByteLength byteLength : 2;
     Core core : 3;
     HyperThreading hyperThreading : 2;
