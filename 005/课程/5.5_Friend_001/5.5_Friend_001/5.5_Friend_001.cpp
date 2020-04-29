@@ -53,6 +53,7 @@ class Point
     friend double Cal::dist(Point &p1, Point &p2);
     //5.设置友元类可以使友元类中的所有成员都可以访问授权类中的private成员。
     //6.虽然这里把PointFriend类写在Point类中，但是实际上并不能通过Point的对象访问PointFriend类的成员。
+    //7.注意，如果在友元函数后面添加一个成员的话，这个成员的访问级别是class的默认访问级别private，而不是上面的public。
     friend class PointFriend;
 
     private:
@@ -111,7 +112,7 @@ int main()
     cout << "Dist: " << PointFriend().dist(a, b) << endl;
     cout << endl;
 
-    //7.析构函数可以主动调用。
+    //8.析构函数可以主动调用。
     a.~Point();
     showCount();
 
