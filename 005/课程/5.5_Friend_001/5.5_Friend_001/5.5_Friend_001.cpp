@@ -7,6 +7,7 @@ using namespace std;
 
 //友元是一种在效率与安全性的权衡间为了提升效率而做出的设计。
 //因为它破坏了类的封装，因此要慎重地使用。
+//另外要注意！友元关系是单向的！
 
 //4.注意，这里必须要用一下前向引用声明。不然在Cal类中无法在成员函数形参中使用Point。
 class Point;
@@ -57,11 +58,11 @@ class Point
 };
 int Point::count = 0;
 
-double Cal::dist(Point &p1, Point &p2)
+//1.由于友元函数是独立于类的函数，因此如果需要访问对象中的成员，必须以那个对象作为形参。
+double dist(Point &p1, Point &p2)
 {
-    //4.这种类似友元函数的写法并不能真正实现访问。
-    double x = (double)(p1.getX() - p2.getX());
-    double y = (double)(p1.getY() - p2.getY());
+    double x = (double)(p1.x - p2.x);
+    double y = (double)(p1.y - p2.y);
     return sqrt(x * x + y * y);
 }
 
@@ -69,11 +70,12 @@ void showCount()
 {
     cout << "Point count: " << Point::count << endl;
 }
-//1.由于友元函数是独立于类的函数，因此如果需要访问对象中的成员，必须以那个对象作为形参。
-double dist(Point &p1, Point &p2)
+
+double Cal::dist(Point &p1, Point &p2)
 {
-    double x = (double)(p1.x - p2.x);
-    double y = (double)(p1.y - p2.y);
+    //4.这种类似友元函数的写法并不能真正实现访问。
+    double x = (double)(p1.getX() - p2.getX());
+    double y = (double)(p1.getY() - p2.getY());
     return sqrt(x * x + y * y);
 }
 
