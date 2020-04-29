@@ -2,19 +2,58 @@
 //
 
 #include <iostream>
+using namespace std;
+
+class Point
+{
+    public:
+    Point(int xx, int yy)
+    {
+        x = xx;
+        y = yy;
+        count++;
+        cout << "Calling Constructor." << endl;
+    }
+    Point() :
+        Point(0, 0)
+    {}
+    Point(Point &pnt)
+    {
+        x = pnt.x;
+        y = pnt.y;
+        count++;
+        cout << "Calling Copy Constructor." << endl;
+    }
+    ~Point()
+    {
+        count--;
+        cout << "Calling Destructor." << endl;
+    }
+    int getX() { return x; }
+    int getY() { return y; }
+
+    //想要实现在没有对象的情况下也能访问类的静态成员，就必须定义一个静态函数成员。
+    //注意，这里定义了静态函数成员，就不能在写一个面向对象的showPoint()函数了。静态函数成员与函数成员间无法实现重载，会报错。
+    static void showPoint()
+    {
+        cout << "Point number: " << count << endl;
+    }
+
+    private:
+    int x, y;
+    static int count;
+};
+
+int Point::count = 0;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Point::showPoint();
+    Point a(1, 5);
+    Point::showPoint();
+    Point b(a);
+    Point::showPoint();
+    //这里可以再次看出，这种类名创建的临时对象会在这行语句结束之后立刻就调用析构函数被销毁。
+    Point(1, 3);
+    Point::showPoint();    
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
