@@ -1,4 +1,4 @@
-﻿// 5.2_ScopeAndVisiblity_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// 5.2_ScopeAndVisibility_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
@@ -67,5 +67,5 @@ int test1(int a, int b)
 	else
 	{
 		return a + b;
-	}    
+	}
 }
