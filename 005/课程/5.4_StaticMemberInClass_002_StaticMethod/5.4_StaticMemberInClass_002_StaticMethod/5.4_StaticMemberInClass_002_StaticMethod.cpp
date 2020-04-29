@@ -34,7 +34,7 @@ class Point
 
     //想要实现在没有对象的情况下也能访问类的静态成员，就必须定义一个静态函数成员。
     //注意，这里定义了静态函数成员，就不能在写一个面向对象的showPoint()函数了。静态函数成员与函数成员间无法实现重载，会报错。
-    static void showPoint()
+    static void showCount()
     {
         cout << "Point number: " << count << endl;
     }
@@ -48,12 +48,12 @@ int Point::count = 0;
 
 int main()
 {
-    Point::showPoint();
+    Point::showCount();
     Point a(1, 5);
-    Point::showPoint();
+    Point::showCount();
     Point b(a);
-    Point::showPoint();
+    Point::showCount();
     //这里可以再次看出，这种类名创建的临时对象会在这行语句结束之后立刻就调用析构函数被销毁。
     Point(1, 3);
-    Point::showPoint();    
+    Point::showCount();    
 }
