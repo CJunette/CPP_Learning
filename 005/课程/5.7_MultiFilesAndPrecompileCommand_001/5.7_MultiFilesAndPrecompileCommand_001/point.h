@@ -2,6 +2,7 @@
 //point.h
 #pragma once
 #include <iostream>
+//通常情况下，最好不要把using namespace放在头文件中，因为这样会导致include该头文件的源文件都默认能访问那个命名空间。在调用相关预设函数时，用“命名空间::函数名”的方法。
 using namespace std;
 
 //书上有提到，如果误将需要分配空间的定义写入头文件中的话，可能会导致多个源文件包含头文件时，空间在不同编译单元中被分配多次。

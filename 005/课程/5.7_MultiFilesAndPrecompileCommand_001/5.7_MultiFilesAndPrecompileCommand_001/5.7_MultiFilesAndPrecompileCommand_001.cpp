@@ -3,7 +3,7 @@
 
 #include <iostream>
 //对于自定义的头文件通常用“#include "文件名"”的形式include。
-//这样的写法会让程序在include头文件时首先在当前目录下寻找需要的头文件，而“#include <文件名>”的写法会到编译环境的include子目录下寻找预设的头文件。
+//这样的写法会让程序在include头文件时首先在当前目录下寻找需要的头文件，找不到了再到标准目录下去找；而“#include <文件名>”的写法会到编译环境的include子目录（就是之前说的的标准目录）下寻找预设的头文件。
 #include "point.h"
 using namespace std;
 
