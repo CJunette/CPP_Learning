@@ -37,7 +37,7 @@ class Line
 };
 
 
-//如果是inline函数同样也不会发生重复定义的问题
+//如果是inline函数同样也不会发生重复定义的问题。
 inline void helloWorld()
 {
 	std::cout << "hello world" << std::endl;
