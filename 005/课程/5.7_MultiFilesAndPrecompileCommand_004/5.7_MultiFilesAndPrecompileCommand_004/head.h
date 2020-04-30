@@ -2,7 +2,6 @@
 
 using namespace std;
 
-//不论是普通函数、普通变量、带参数的类、不带参数的类，只要在头函数中声明，然后在主函数中因嵌套调用导致重复定义的，最终都会报错。
 
 inline void HelloWorld()
 {

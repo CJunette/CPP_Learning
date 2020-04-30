@@ -1,6 +1,6 @@
 #include "head.h"
 
-/*
+
 Point::Point(int xx, int yy) :
 	x(xx), y(yy)
 {
@@ -40,4 +40,3 @@ void Method::helloWorld()
 {
 	std::cout << "Hello World" << std::endl;
 }
-*/
