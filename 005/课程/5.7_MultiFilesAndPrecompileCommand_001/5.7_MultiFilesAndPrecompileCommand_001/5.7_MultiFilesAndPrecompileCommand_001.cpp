@@ -14,4 +14,6 @@ int main()
     Point b(a);
     cout << "Point B: " << b.getX() << "," << b.getY() << endl;
     Point::showCount();
+    
+    countChange();
 }
