@@ -33,7 +33,7 @@ class Point
     int getY() { return y; }
 
     //想要实现在没有对象的情况下也能访问类的静态成员，就必须定义一个静态函数成员。
-    //注意，这里定义了静态函数成员，就不能在写一个面向对象的showPoint()函数了。静态函数成员与函数成员间无法实现重载，会报错。
+    //注意，这里定义了静态函数成员，就不能在写一个面向对象的showPoint()函数了。静态函数成员与函数成员间无法实现重载，会报错。原因是对象也可以调用静态方法。
     static void showCount()
     {
         cout << "Point number: " << count << endl;
@@ -51,6 +51,8 @@ int main()
     Point::showCount();
     Point a(1, 5);
     Point::showCount();
+    //这里可以看到，对象也可以直接调用静态方法。
+    a.showCount();
     Point b(a);
     Point::showCount();
     //这里可以再次看出，这种类名创建的临时对象会在这行语句结束之后立刻就调用析构函数被销毁。
