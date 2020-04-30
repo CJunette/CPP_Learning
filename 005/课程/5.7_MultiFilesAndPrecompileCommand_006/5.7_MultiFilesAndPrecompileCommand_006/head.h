@@ -37,8 +37,16 @@ class Line
 };
 
 
-//头文件中的方法不会发生重复定义的问题。
+//如果是inline函数同样也不会发生重复定义的问题。
+inline void helloWorld()
+{
+	std::cout << "hello world" << std::endl;
+}
+
+//头文件中的函数和变量还是会发生重复定义的问题。
 /*
+int a;
+
 int calDif(Point pnt)
 {
 	return pnt.getX() - pnt.getY();
