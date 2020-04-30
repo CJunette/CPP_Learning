@@ -1,4 +1,5 @@
 //Definition of class Point.
+//point.cpp
 
 #include "point.h"
 #include <iostream>

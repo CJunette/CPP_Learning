@@ -1,7 +1,11 @@
+//Headfile
+//point.h
 #pragma once
 #include <iostream>
 using namespace std;
 
+//书上有提到，如果误将需要分配空间的定义写入头文件中的话，可能会导致多个源文件包含头文件时，空间在不同编译单元中被分配多次。
+//这条我暂时不知道具体的意思，但应该会在讲预编译处理的时候提到。
 class Point
 {
 	public:
