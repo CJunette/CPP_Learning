@@ -37,6 +37,7 @@ class Point
 int main()
 {
     //这里我有个问题，如何才能对动态内存分配的对象进行逐一的初始化？
+    //[解答]，可以用Point *ptr = new Point[2]{Point(1, 2), Point(3, 4)};这样的方式。注意这样的方式用的是构造函数（但没有适用右值引用的复制构造函数还是会报错）。
     Point *ptr = new Point[2];
     ptr[0].move(5, 10);
     ptr[1].move(15, 20);
