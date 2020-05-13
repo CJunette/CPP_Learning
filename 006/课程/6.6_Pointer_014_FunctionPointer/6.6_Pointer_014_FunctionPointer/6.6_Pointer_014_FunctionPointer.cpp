@@ -40,4 +40,6 @@ int main()
     cout << "The sum of " << a << " and " << b << " is " << compute(sum, a, b) << "." << endl;
     cout << "The min of " << a << " and " << b << " is " << compute(min, a, b) << "." << endl;
     cout << "The max of " << a << " and " << b << " is " << compute(max, a, b) << "." << endl;
+
+    //函数指针存在一点问题。如果我希望在一个函数的形参中放函数指针，未来用某个对象的函数成员来作为实参，当我这个函数中用对象调用这个函数指针时会出错，显示对象没有这种方法。另外，函数指针不能用类方法初始化。
 }
