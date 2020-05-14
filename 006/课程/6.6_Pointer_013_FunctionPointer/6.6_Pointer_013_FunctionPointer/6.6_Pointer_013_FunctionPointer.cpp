@@ -28,6 +28,7 @@ const float PI = 3.141592635898;
 int main()
 {
     //在定义函数指针时，需要用“数据类型 (*函数指针名)(形参列表)”。其中函数指针名外的括号是十分重要的，因为去掉括号就变成了定义返回值为指针的函数。
+    //同样注意，不要把形参表写到那个括号里去。
     //之所以有这些复杂的规则，说白了还是因为“指针指向对象的类型必须和指针自身的类型相符”这一原则。函数指针必须在定义时就确定好自己指向的目标的类型是怎样的。
     void (*funcPtr)(float);
 
@@ -42,4 +43,11 @@ int main()
     funcPtr(PI);
     funcPtr = &printFloat;
     funcPtr(PI);
+
+    //当需要定义多个定义函数指针时，还可以用typedef实现更加简洁的定义。如下面就为返回值为void，参数为float的函数指针定义了一个别名voidFunctionFloat。
+    typedef void (*voidFunctionFloat)(float);
+    //当在需要定义这种类型的指针时，可以用这个别名实现快速的定义。
+    voidFunctionFloat funPtr_1;
+    voidFunctionFloat funPtr_2;
+    voidFunctionFloat funPtr_3;
 }
