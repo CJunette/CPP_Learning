@@ -1,5 +1,5 @@
 ﻿// 6.13_Supplement_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+//书上p196的例子。
 
 #include <iostream>
 #include <cmath>
@@ -36,6 +36,9 @@ class Point
         avrX /= num;
         avrY /= num;
 
+        //本来在这里我是想定义一个函数，让这个函数以函数指针为形参，然后在不同情况下调用不同的成员函数。
+        //但似乎让成员函数作为函数回调是个很困难的问题。因此暂时放弃。
+        //收回上面这句话，书上p215就有讲怎么用指针指向类的非静态成员。
         float lxx = 0, lyy = 0, lxy = 0;
         for (int i = 0; i < num; i++)
         {
