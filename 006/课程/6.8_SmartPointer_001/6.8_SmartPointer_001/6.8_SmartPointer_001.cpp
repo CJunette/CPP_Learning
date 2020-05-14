@@ -129,6 +129,7 @@ int main()
     unique_ptr<int> uPtr_4 = unique_ptr<int>(new int(4));
 
     //4.shared_ptr可以创建允许有其他指针指向自己所指向的对象的指针。
+    //4.shared_ptr似乎也是只能指向动态内存分配的对象。
     shared_ptr<int> sPtr_1(new int(3));
     shared_ptr<int> sPtr_2(sPtr_1);
 
