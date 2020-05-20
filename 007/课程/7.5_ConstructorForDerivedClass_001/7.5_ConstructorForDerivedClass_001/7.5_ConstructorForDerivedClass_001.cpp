@@ -55,6 +55,7 @@ Base3::Base3(int b1, int b3):
 	cout << "Calling Base3 constructor..." << endl;
 }
 
+//3.Base4的定义与Base1类似，不是任何类的派生类。
 class Base4
 {
 	public:
@@ -83,6 +84,7 @@ class Base5: public Base1, public Base4
 	}
 };
 
+//4.Base6的定义与Base1类似，不是任何类的派生类。
 class Base6
 {
 	public:
@@ -102,6 +104,7 @@ class Base7: public Base1, public Base6
 	int b7;
 	Base4 base4;
 	Base7(Base4 &base4, int b1 = 1, int b6 = 6, int b7 = 7):
+		//4.可以看到，初始化列表中的排序并不影响最终的初始化顺序。
 		b7(b7), base4(base4), Base1(b1), Base6(6)
 	{
 		cout << "Calling Base7 constructor..." << endl;
