@@ -103,9 +103,9 @@ class Base7: public Base1, public Base6
 	public:
 	int b7;
 	Base4 base4;
-	Base7(Base4 &base4, int b1 = 1, int b6 = 6, int b7 = 7):
+	Base7(int b1 = 1, int b4 = 4, int b6 = 6, int b7 = 7):
 		//4.可以看到，初始化列表中的排序并不影响最终的初始化顺序。
-		b7(b7), base4(base4), Base1(b1), Base6(6)
+		b7(b7), Base1(b1), Base6(6), base4(Base4(b4))
 	{
 		cout << "Calling Base7 constructor..." << endl;
 	}
@@ -125,7 +125,6 @@ int main()
 	cout << endl;
 	Base6 b6(6);
 	cout << endl;
-	Base7 b7(b4, 1, 6, 7);
+	Base7 b7(1, 4, 6, 7);
 	cout << endl;
-
 }
