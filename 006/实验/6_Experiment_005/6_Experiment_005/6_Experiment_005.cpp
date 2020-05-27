@@ -85,8 +85,8 @@ int main()
     Date d1(1971, 10, 29);
     Date d2(1964, 9, 10);    
     People pp[] = {
-    People("Pony Ma", "000000001", "Male", d1, "11011011011011"), 
+    People("Pony Ma", "000000001", "Male", d1, "11011011011011"),
     People("Jack Ma", "000000001", "Male", d2, "11011011011011")
-    }
+    };
 
 }
