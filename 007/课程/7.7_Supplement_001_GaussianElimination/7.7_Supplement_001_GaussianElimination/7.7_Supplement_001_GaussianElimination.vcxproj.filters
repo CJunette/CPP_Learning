@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="7.7_Supplement_GaussianElimination.cpp">
+    <ClCompile Include="7.7_Supplement_001_GaussianElimination.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="matrix.cpp">
+    <ClCompile Include="Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="linearEqu.cpp">
+    <ClCompile Include="LinearEqu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="matrix.h">
+    <ClInclude Include="Matrix.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="linearEqu.h">
+    <ClInclude Include="LinearEqu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

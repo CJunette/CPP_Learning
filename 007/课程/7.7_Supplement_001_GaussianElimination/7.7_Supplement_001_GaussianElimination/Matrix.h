@@ -7,12 +7,12 @@ class Matrix
 	Matrix(Matrix const &m);
 	~Matrix();
 
-	void setMatrix(const double*);
+	void setMatrix(const double *);
 	void printMatrix() const;
 	int getSize() const;
 
 
-	private:	
+	private:
 	int size;
 	//实际上这里可以直接把matrix设成protect类型的，这样就可以直接在派生类中进行修改。（不过如果设成private类型也有“避免派生类对基类数据不必要的修改”的好处。）
 	double **matrix;

@@ -46,7 +46,7 @@ LinearEqu::~LinearEqu()
 	delete[] order;
 }
 
-double LinearEqu:: getCons(int i) const
+double LinearEqu::getCons(int i) const
 {
 	return cons[i];
 }
@@ -75,9 +75,9 @@ void LinearEqu::printLinearEqu() const
 }
 
 void LinearEqu::swapOrder(int i1, int i2)
-{	
-	int temp;	
-	temp = order[i2];	
+{
+	int temp;
+	temp = order[i2];
 	order[i2] = order[i1];
 	order[i1] = temp;
 }
@@ -153,13 +153,13 @@ bool LinearEqu::solve()
 		{
 			swapRow(k, r);
 			swapRowForCons(k, r);
-		}		
+		}
 		if(c != k)
 		{
 			swapColumn(k, c);
 			swapOrder(k, c);
 		}
-		
+
 		std::cout << "after swap" << std::endl;
 		printLinearEqu();
 		std::cout << std::endl;
@@ -216,7 +216,7 @@ bool LinearEqu::solve()
 			sum += getElement(i, j) * solution[j];
 		}
 		solution[i] = cons[i] - sum;
-	}	
+	}
 	sortSolution();
 	return true;
 }

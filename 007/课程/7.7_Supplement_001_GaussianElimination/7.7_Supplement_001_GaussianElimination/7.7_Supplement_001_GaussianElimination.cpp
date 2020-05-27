@@ -16,7 +16,7 @@ int main()
 
     double a[4] = { 1, 1, 2, 1 };
     double b[2] = { 3, 4 };
-    
+
     le.setLinearEqu(a, b);
     le.printLinearEqu();
     le.printMatrix();
@@ -45,7 +45,7 @@ int main()
     le.setLinearEqu(a, b);
     le.printLinearEqu();
     cout << endl;
-    
+
     if(le.solve())
     {
         le.printSolution();
@@ -58,11 +58,11 @@ int main()
         0.1968, 0.2071, 1.2168, 0.2271,
         0.1581, 1.1675, 0.1768, 0.1871,
         1.1161, 0.1254, 0.1397, 0.149 };
-    
-    double b[4] = { 1.8471, 1.7471, 1.6471, 1.5471};
+
+    double b[4] = { 1.8471, 1.7471, 1.6471, 1.5471 };
 
     le.setLinearEqu(a, b);
-    le.printLinearEqu();    
+    le.printLinearEqu();
     cout << endl;
 
     if(le.solve())
@@ -73,17 +73,17 @@ int main()
     {
         cout << "Unique solution does not exist." << endl;
     }
-    
+
     //下面是一个方程组不存在唯一解的情况。
     /*
     LinearEqu le(3);
     double a[9] = { 1, 1, 1, 2, 2, 2, 3, 3, 3 };
     double b[3] = { 6, 12, 18 };
-    
+
     le.setLinearEqu(a, b);
     le.printLinearEqu();
     cout << endl;
-    
+
     if(le.solve())
     {
         le.printSolution();

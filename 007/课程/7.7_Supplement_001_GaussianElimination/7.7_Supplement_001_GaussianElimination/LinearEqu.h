@@ -15,7 +15,7 @@ class LinearEqu: public Matrix
 
 	double getCons(int) const;
 	double getSolution(int) const;
-	int getOrder(int) const;	
+	int getOrder(int) const;
 	void printLinearEqu() const;
 	void printSolution() const;
 	void printOrder() const;
