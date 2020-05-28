@@ -17,6 +17,10 @@ class Base
     {
         cout << "Calling Base copy constructor..." << endl;
     }
+    ~Base()
+    {
+        cout << "Calling Base destructor..." << endl;
+    }
     private:
     int base;
 };
@@ -34,6 +38,10 @@ class Member
     {
         cout << "Calling Member copy constructor..." << endl;
     }
+    ~Member()
+    {
+        cout << "Calling Member destructor..." << endl;
+    }
 
     private:
     int member;
@@ -48,10 +56,15 @@ class Derived: public Base
         cout << "Calling Derived constructor..." << endl;
     }
     Derived(const Derived &drv):
-        //此处如果删掉下面初始化列表中的Base()，则不会调用基类的复制构造函数，转而调用基类的构造函数。
+        //此处如果删掉下面初始化列表中的Base(drv)，则不会调用基类的复制构造函数，转而调用基类的构造函数。
+        //另外，注意这里其实使用派生类的对象做基类复制构造函数的参数。
         derived(drv.derived), Base(drv), member(drv.member)
     {
         cout << "Calling Derived copy constructor..." << endl;
+    }
+    ~Derived()
+    {
+        cout << "Calling Derived destructor..." << endl;
     }
 
     private:
@@ -62,5 +75,6 @@ class Derived: public Base
 int main()
 {
     Derived d1(1, 0, 2);
+    cout << endl;
     Derived d2(d1);
 }
