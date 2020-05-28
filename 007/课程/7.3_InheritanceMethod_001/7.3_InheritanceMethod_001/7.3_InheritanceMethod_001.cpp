@@ -51,6 +51,6 @@ int main()
     cout << "The data of rectangle:" << endl;
     //同理，由于不能访问x和y，所以要通过getX()和getY()这些接口来间接地访问。
     //getX()和getY()都是public成员，且被继承。
-    //此处还有一个小问题，当cout中有多个函数被调用时，会从右向左逐个执行，而非从左向右。
+    //此处还有一个小问题，当cout中有多个函数被调用时，会从右向左逐个执行，而非从左向右。原因是C++是从右向左向内存中压入参数的。
     cout << rect.getX() << ", " << rect.getY() << ", " << rect.getW() << ", " << rect.getH() << endl;
 }
