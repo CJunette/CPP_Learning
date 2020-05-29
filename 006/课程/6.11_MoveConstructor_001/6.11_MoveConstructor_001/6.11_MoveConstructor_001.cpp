@@ -85,8 +85,15 @@ A getA()
     */
 }
 
+IntNum &fun(IntNum i)
+{
+    return i;
+}
+
 int main()
 {    
+    fun(IntNum());
+    cout << endl;
     cout << getNum().getInt() << endl;
     cout << endl;
 
