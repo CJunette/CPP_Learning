@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="8.3_VirualFunction_001.cpp">
+    <ClCompile Include="8.3_VirtualFunction_001.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

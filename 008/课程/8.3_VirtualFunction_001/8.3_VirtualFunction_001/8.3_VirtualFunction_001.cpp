@@ -1,4 +1,4 @@
-﻿// 8.3_VirualFunction_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// 8.3_VirtualFunction_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
@@ -63,8 +63,8 @@ int main()
     //之后发现，其实之前出错的原因是对右值取址引发了错误，与函数的参数类型无关！
     /*
     func2(Base1());
-    */    
-    
+    */
+
     //可以看到，在使用虚函数后，成功实现了以基类指针为形参，传入不同类型的指针，执行不同类型函数的目的。
     func1(&b1);
     func1(&b2);

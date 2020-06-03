@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{A049232F-E614-4883-BC87-F7F4884D35CE}</ProjectGuid>
+    <ProjectGuid>{4C686FF5-004F-4BD6-BD9D-CFB54EEDFA54}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My83VirualFunction001</RootNamespace>
+    <RootNamespace>My83VirtualFunction001</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="8.3_VirualFunction_001.cpp" />
+    <ClCompile Include="8.3_VirtualFunction_001.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
