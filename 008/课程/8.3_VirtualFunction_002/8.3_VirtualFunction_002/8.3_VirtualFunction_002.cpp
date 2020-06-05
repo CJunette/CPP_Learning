@@ -1,135 +1,145 @@
 ﻿// 8.3_VirtualFunction_002.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//这里我想确认一下基类及派生类中同名函数返回值的差异对虚函数的影响。
-//课上提到对返回值定义的要求是，返回值类型相同，或满足复制兼容规则的指针、引用。
+//这里我想确认一下，在派生类中对与基类虚函数同名的函数进行调整会使其变为基类虚函数的重载。
+//课上提到的算作派生类对基类虚函数重写的条件有4点：
+//1.函数名称相同（名称不同自然算是不同的函数，没有必要做讨论）
+//2.参数列表相同
+//3.返回值相同或满足赋值兼容规则
+//4.const属性相同
+//另外这里简单地提到了用派生类和基类的对象访问虚函数和用指向派生类的基类指针访问虚函数的问题。在之后会展开。
 
 #include <iostream>
-#include <typeinfo>
 using namespace std;
 
 class Base1
 {
-    public:    
-    virtual Base1 *func();
+    public:
+    virtual Base1 *func()
+    {
+        cout << "func() in Base1" << endl;
+        return new Base1;
+    }
+    int a = 0;
+};
+
+class Derived1: public Base1
+{
+    public:
+    virtual Derived1 *func()
+    {
+        cout << "func() in Derived1" << endl;
+        return new Derived1;
+    }
     int a = 1;
 };
-Base1 *Base1::func()
-{
-    cout << "func() in Base1" << endl;
-    return new Base1();
-}
-//-----------------------------------------------------
-class Base2: public Base1
+
+class Derived2: public Base1
 {
     public:
-    virtual Base2 *func();
+    //2.当在派生类中重写虚函数时改变了其返回值类型，如果返回值类型不符合要求，编译器会直接报错。
+    /*
+    virtual void *func()
+    {}
+    */
     int a = 2;
 };
-Base2 *Base2::func()
-{
-    cout << "func() in Base2" << endl;
-    return new Base2();
-}
-//-----------------------------------------------------
-class Derived1: public Base2
+
+class A
+{};
+class Derived3: public Base1
 {
     public:
-    virtual Derived1 *func();
+    Derived3(A) {}
+    //3.对虚函数重写时的返回值类型要求似乎是返回值类型是同一类族中的类。
+    //3.这里，即使类A能隐式的转换为Derived3，仍然因为不是在同一类族所以报错。
+    /*
+    virtual A *func()
+    {}
+    */
     int a = 3;
 };
-Derived1 *Derived1::func()
-{
-    cout << "func() in Derived1" << endl;
-    return new Derived1();
-}
-//-----------------------------------------------------
-class Derived2: public Base2
+
+class Derived4: public Base1
 {
     public:
-    //2.当派生类中重新定义基类中的虚函数，当返回值类型并不符合要求时，编译器会直接报错提示。
-    //2.如果像我这样通过修改函数参数列表强行创建一个同名函数，则当用基类指针调用虚函数时，会调用基类中的函数；当用对象调用函数时，会调用该类中定义的函数。
-    void func(int = 0);
+    //4.当在派生类中重写虚函数时改变了其参数列表，编译器不会报错。此时相当于在派生类中创建了一个与基类虚函数同名的函数重载。
+    //4.根据隐藏规则，此时基类中的同名函数（此时就是虚函数）及重载都会被隐藏。
+    //4.此时如果不加“virtual”，那派生类中新创建的函数就是一般成员函数；如果加上“virtual”，派生类中新创建的就是虚函数。
+    virtual Derived4 *func(int i = 0)
+    {
+        cout << "func() in Derived4" << endl;
+        return new Derived4;
+    }
+    int a = 4;
 };
-void Derived2::func(int)
-{
-    cout << "func() in Derived2" << endl;
-}
-//-----------------------------------------------------
-class Derived3: public Derived2
-{
-    public:    
-    //3.如果对之前的派生类进行进一步派生，在创建同名函数时，会再次根据函数名、参数表、返回值，判断函数是否为直接基类或间接基类的虚函数的覆盖。
-    //3.即使其直接基类（Derived2）中通过创建了一个参数表不同的同名函数隐藏了虚函数，只要间接基类（Base2）中存在虚函数，这里对同名函数的满足要求的定义就会再次被视为是对虚函数的覆盖。
-    Derived3 *func();
-};
-Derived3 *Derived3::func()
-{
-    cout << "func() in Derived3" << endl;
-    return new Derived3();
-}
 
-//4.派生类中对虚函数覆盖时的返回值的要求似乎就是指返回值的类型必须是同一类族中的类。
-//4.我尝试返回一个可以满足通过构造函数实现对本类类型转换的类的动态对象，但编译器依旧以返回值不符合要求为由报错。
-/*
-class A
-{
-};
-class Derived4: Base2
+class Derived5: public Base1
 {
     public:
-    Derived4()
+    //5.通过改变虚函数的const属性再创建新的与虚函数同名的函数，同样相当于在派生类中创建了与基类虚函数同名的重载。
+    //5.其具体表现与Derived4中的函数重载表现是一样的。
+    virtual Derived5 *func() const
     {
+        cout << "func() in Derived4" << endl;
+        return new Derived5;
     }
-    Derived4(A const&)
-    {
-    }
-    A *func();
+    int a = 5;
 };
-A *Derived4::func()
-{
-    cout << "func() in Derived3" << endl;
-    return new A();
-}
-*/
 
-void func1(Base1 *obj)
+class Derived6: public Derived5
 {
-    //1.这里有一点问题，由于auto并不是真正在程序运行时确定标识符类型的（C++并没有真正的反射机制），因此在这里不论传入指针调用函数的返回值是什么，o的类型都是Base1*。
-    //1.这也就导致所有的o->a的值都是1。（如何实现对不同指针能访问到不同的数据成员？用对象成员指针？）
-    //1.所以我只能通过在函数func()内添加语句来区分调用的是哪一个函数。
-    auto o = obj->func();
-    cout << o->a << endl;
+    public:
+    //6.当直接基类(Derived5)中隐藏了间接基类(Derived6)中的虚函数时，直接基类的派生类对间接基类的虚函数进行重写时，仍然能够成功重写。
+    //6.也就是说，只要基类中存在某特定名称、参数列表、返回值类型、const属性的虚函数，即使在派生的过程中被一些派生类隐藏，
+    //6.那些隐藏了虚函数的派生类派生出的派生类仍然能够通过正确的名称、参数列表、返回值类型、const属性对那个虚函数实现重写。
+    virtual Derived6 *func()
+    {
+        cout << "func() in Derived6" << endl;
+        return new Derived6;
+    }
+    int a = 6;
+};
+
+void f(Base1 *b1)
+{
+    auto o = b1->func();
+    //0.这里有一个问题，auto并不是通过动态绑定确定数据类型的（C++貌似没有反射），因此就导致即使传入的指针指向的是派生类对象，o仍然是基类对象。
+    //0.也就是说，对数据成员的访问并没有像虚函数这样的动态机制。
+    b1->a;
     delete o;
 }
 
 int main()
 {
+    //1.虽然Base1和Base2的虚函数func()返回值类型各不相同，返回值类型是满足赋值兼容规则的。因此派生类中对func()的重写相当于对基类中虚函数的覆盖，而不算是对基类虚函数的重载。
     Base1 b1;
-    Base2 b2;
-    Derived1 d1;    
-    //1.虽然Base1、Base2、Derived1三个对象所属的类的func()函数返回值各不相同，但都属于同一类族之内，因此Base2和Derived1中的func()函数都算对Base1中虚函数的覆盖。
-    func1(&b1);
-    func1(&b2);
-    func1(&d1);
+    Derived1 d1;
+    f(&b1);
+    f(&d1);
     cout << endl;
 
-    //2.而当派生类中重新定义了与虚函数同名的函数，且返回值不符合要求时，编译器就会直接报错。（奇怪的是当用正确的返回类型，但形参列表不同时，不会报错，但函数会覆盖之前的虚函数）
-    //2.此时如果用同名函数，不同的返回值和不同的参数列表，则会覆盖之前的虚函数。函数func1()会调用最近一级基类中可用的虚函数，而直接用对象调用则会调用本类中新创建的函数。
-    Derived2 d2;
-    func1(&d2);
-    d2.func();
-    cout << endl;
-    //3.进一步的，在先前那个用一般函数覆盖虚函数的类Derived2的基础上再派生出新的派生类Derived3。
-    //3.此时虽然直接派生类中没有虚函数，但由于间接派生类中还是存在虚函数，因此只要形式满足要求，这里仍然能正确覆盖之前的虚函数。
-    Derived3 d3;
-    func1(&d3);
+    //4.而此时由于基类中并不存在带参数的func(int)，因此用基类指针调用时只能访问到基类第基类的虚函数。
+    //4.即使基类中存在带参数的非虚函数func(int)，且f()调用的也是那个带参数的func(int)。f()最终仍然只会调用基类中的非虚函数，而非派生类中的虚函数。
+    //4.这种派生类中将基类非虚函数修改为虚函数的做法，无法用基类的指针来表现多态性。（这些内容之后会详细讲）
+    Derived4 d4;
+    f(&d4);
+    d4.func();
     cout << endl;
 
-    //5.虚函数在通过对象和指针访问时会表现出很大的差异。
-    //5.当用基类指针指向一个派生类的成员，并访问其中的成员函数时，访问到的是派生类中的成员函数。
-    //5.而当用一个派生类对象去初始化基类对象，在用基类对象访问成员函数时，访问到的是基类中的成员函数。
-    Base1 *pbd1 = &d1;
-    pbd1->func();
-    Base1 bd1 = d1;
-    bd1.func();
+    //5.Derived5的表现和Derived4的表现是十分相似的。
+    Derived5 d5;
+    f(&d5);
+    d5.func();
     cout << endl;
+
+    //6.从这里的输出值可以看出，Derived6中确实在Derived5隐藏了Base1的虚函数的情况下，对那个虚函数进行了重写。
+    Derived6 d6;
+    f(&d6);
+    cout << endl;
+
+    //7.最后想简单说一下关于指针（引用）访问和对象访问。
+    //7.虚函数的多态是只能通过指针或引用来体现的。用指向基类的派生类指正访问虚函数，能够访问到派生类中的虚函数；但用派生类对象去初始化基类对象再访问虚函数，只能访问到基类的虚函数。
+    Base1 *pb1 = &d1;
+    Base1 b1test = d1;
+    pb1->func();
+    b1test.func();
 }
