@@ -54,6 +54,8 @@ double Trapz::operator()(double a, double b, double eps) const
     }
     
     n = n * 2;
+    h = h / 2;
+    //用循环的方式解决问题。
     do
     {
         for(int i = 0; i < n; i++)
@@ -61,7 +63,7 @@ double Trapz::operator()(double a, double b, double eps) const
             if(i % 2 != 0)
             {
                 double x = a + (b - a) / n * i;
-                thisIntegral += pf(x) * h / n;
+                thisIntegral += pf(x) * h;
             }
         }
 
@@ -74,6 +76,7 @@ double Trapz::operator()(double a, double b, double eps) const
         else
         {
             n *= 2;
+            h /= 2;
             lastIntegral = thisIntegral;
             thisIntegral = 0;
         }
