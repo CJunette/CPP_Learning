@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="8.5_Supplement_004_TypeId.cpp">
+    <ClCompile Include="8.4_Supplement_004_Typeid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

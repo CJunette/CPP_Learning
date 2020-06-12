@@ -1,4 +1,4 @@
-﻿// 8.5_Supplement_004_TypeId.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// 8.5_Supplement_004_Typeid.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //关于typeid。
 
 #include <iostream>
@@ -14,19 +14,19 @@ class B0
 {
     public:
     virtual ~B0() {}
-    virtual A0* f() 
-    { 
+    virtual A0 *f()
+    {
         cout << "B0::f()" << endl;
-        return new A0; 
+        return new A0;
     }
 };
 class B1: public B0
 {
     public:
-    virtual A1 *f() 
-    { 
+    virtual A1 *f()
+    {
         cout << "B1::f()" << endl;
-        return new A1; 
+        return new A1;
     }
 };
 
@@ -40,7 +40,7 @@ class Derived: public Base
 {};
 
 void fun(Base *b)
-{    
+{
     const type_info &info1 = typeid(b);
     const type_info &info2 = typeid(*b);
     //3.虽然b是指向多态类型的指针，但b本身作为指针并不是多态类型的。因此每次输出typeid(b)，都是Base *。
@@ -82,7 +82,15 @@ int main()
         //1.如果说上行代码可以解释为指针本身不具有多态性，那为什么下面这行代码也没有对表达式求值？
         cout << typeid((*pb0).f()).name() << endl;
         cout << endl;
-
+        //5.[2020.6.12] 对typeid中出现的问题进行一些小的更新。
+        //5.我自己的一个发现：
+        //5.一般的debug在这里会直接跳过这个语句。但如果看disassembly的话会发现，所有在typeid()中被求值的表达式都会有一行“___RTtypeid”的语句。
+        //5.然后，根据知乎的回答对这个问题进行一下更新。
+        //5.之所以没有求值是因为.f()所返回的类型不是一个多态类型的指针或引用。
+        //5.于是我就尝试去向A0中添加虚函数。但返回结果依然是A0*。
+        //5.进一步的，我尝试将.f()的返回值调整为引用类型，此时返回结果A1。但显然又带来了新的问题，为什么引用和指针此时表现出了差别。
+        //5.[进一步的说明]
+        //5.原因很简单，因为抛开指针所指向的对象，指针本身是不具备多态性的。
     }
 
     //2.书上给出的例子。
@@ -90,5 +98,5 @@ int main()
     Base b;
     fun(&b);
     Derived d;
-    fun(&d);    
+    fun(&d);
 }
