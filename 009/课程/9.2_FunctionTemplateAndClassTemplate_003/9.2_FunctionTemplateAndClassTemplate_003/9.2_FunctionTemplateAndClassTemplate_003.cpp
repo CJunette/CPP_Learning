@@ -67,6 +67,7 @@ int main()
     s2.putItem(-7);
     cout << s1.getItem() << " " << s2.getItem() << endl;
 
+    //注意，这里的类似数组初始化的方式能够用来构造有多个数据成员的类。（即使那个类没有写默认的构造函数。）
     Student g = { 1000, 23 };
     Store<Student> s3;
     s3.putItem(g);
