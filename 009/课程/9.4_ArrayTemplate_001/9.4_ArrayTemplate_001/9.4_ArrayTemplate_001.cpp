@@ -1,11 +1,12 @@
 ﻿// 9.4_ArrayTemplate_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //按课程视频的内容，“9.3 线性群体”并没有需要写代码的地方，所以直接跳到“9.4 数组类模板”。
+//1.-7.是写代码时候的备注。8.-11.的是后面重新看代码之后添加的备注。
 
 #include <iostream>
 #include <cassert>
 using namespace std;
 
-//1.这里之所以多加了一个N，一是可以用这个参数直接控制size的默认值；二是在重载用于用任意类型的数组初始化Array中参数list的操作符“=”时，需要size_t类型的参数来确定数组大小。
+//1.这里之所以多加了一个N(template<class T, int N = 50>)，一是可以z用这个参数直接控制size的默认值；二是在重载用于用任意类型的数组初始化Array中参数list的操作符“=”时，需要size_t类型的参数来确定数组大小。
 //1.[修改] 之前这里的写法有误，将“size_t N”放到这里会使得N在类的实例化时就被初始化，这不是我希望的。
 template<class T>
 class Array
@@ -97,7 +98,7 @@ Array<T>::operator T *()
 template<class T>
  Array<T>::operator const T *() const
 {
-    return T* this;
+    return list;
 }
 
  template<class T>
@@ -113,6 +114,7 @@ void Array<T>::resize(int size)
     {
         return;
     }
+    //8.这里首先要确定需要复制的成员的个数。必须是_size和size中较小的那一个。因为如果较大的那一个是size的话，数组_size - 1之后的成员都是空的，不应该被复制。
     int n = (size > _size) ? _size : size;
     T *temp = new T[size]();
     for(int i = 0; i < n; i++)
@@ -132,13 +134,16 @@ template< size_t N>
 Array<T> & Array<T>::operator = (const T(&arr)[N])
 {    
     int n = sizeof(arr) / sizeof(T);
-    _size = n;
+    //9.这里_size处理的思路和上满的resize()一样。
+    _size = (_size > n) ? n : _size;
     delete[]list;
     list = new T[n];
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < _size; i++)
     {
         list[i] = arr[i];
     }
+    //9.只是最后还是需要把_size变为被复制的对象的大小。
+    _size = n;
     return *this;
 }
 
@@ -146,19 +151,22 @@ template<class T>
 Array<T> &Array<T>::operator = (const Array<T> &arr)
 {
     //5.如果“=”的第二个操作数是自身，就返回自身。
-    //5.这里是对arr进行求值，然后与自身地址进行比较。
+    //5.这里是对arr进行求址，然后与自身地址进行比较。
     if(&arr == this)
     {
         return this;
     }
+    int n;
     //5.如果大小不同，则删掉旧list，以被复制对象的大小创建新的list。
     if(_size != arr._size)
     {
+        //10.复制时处理的思路和8.与9.一致。
+        n = (arr._size > _size) ? _size : arr._size;
         _size = arr._size;
         delete[]list;
         list = new T[_size];
-    }
-    for(int i = 0; i < _size; i++)
+    }    
+    for(int i = 0; i < n; i++)
     {
         list[i] = arr.list[i];
     }
@@ -178,13 +186,17 @@ template<class T>
 template<class S>
 Array<T> &Array<T>::operator =(const Array<S> &arr)
 {
+    int n;
+    //11.注意，这里因为Array<S>和Array<T>是两个不同的类，因此不能在Array<T>中直接用arr._size来访问Array<S>的私有成员arr._size。
     if(_size != arr.getSize())
     {
+        //10.复制时处理的思路和8.与9.一致。
+        n = (arr.getSize() > _size) ? _size : arr.getSize();
         delete[]list;
         _size = arr.getSize();
         list = new T[_size];
     }    
-    for(int i = 0; i < _size; i++)
+    for(int i = 0; i < n; i++)
     {
         list[i] = arr[i];
     }
