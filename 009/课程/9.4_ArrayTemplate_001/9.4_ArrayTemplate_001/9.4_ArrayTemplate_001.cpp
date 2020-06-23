@@ -36,6 +36,7 @@ class Array
     //1.之前我把下面的这个N写到了整体类模板的模板参数中去，结果使得那个模板参数在类生成的时候就被初始化了，没有达到我希望的目的。
     //1.我希望这里是调用函数的时候才确定具体的数组引用的大小N。
     //1.另外，如果需要在类模板中再套用函数模板，只需要把“template<新的参数>”加到对应函数前即可。
+    //1.[补充] 这个做法只能在类模板中使用，不能对函数模板使用。
     template<size_t N>
     Array<T> &operator = (const T (&arr)[N]);
 
@@ -134,7 +135,8 @@ template< size_t N>
 Array<T> & Array<T>::operator = (const T(&arr)[N])
 {    
     int n = sizeof(arr) / sizeof(T);
-    //9.这里_size处理的思路和上满的resize()一样。
+    //9.这里_size处理的思路和上面的resize()一样。
+    //9.[修改] 其实这里不用这样复杂，因为是复制，所以新的_size就直接等于被复制Array的_size就好。
     _size = (_size > n) ? n : _size;
     delete[]list;
     list = new T[n];
