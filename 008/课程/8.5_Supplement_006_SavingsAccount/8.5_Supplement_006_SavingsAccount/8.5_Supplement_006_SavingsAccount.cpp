@@ -84,7 +84,7 @@ int main()
                 {
                     cout << "You can't specify a previous day.";
                 }
-                else if(day > date.getMaxDays())
+                else if(day > date.getMonthDays())
                 {
                     cout << "Invalid day";
                 }

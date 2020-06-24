@@ -70,7 +70,7 @@ int Date::totalDays() const
 	return days + months + years;
 }
 
-int Date::getMaxDays() const
+int Date::getMonthDays() const
 {
 	if(isLeap && month == 2)
 	{

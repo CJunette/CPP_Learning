@@ -9,7 +9,7 @@ class Date
 	int getDay() const;
 	void show() const;
 	int totalDays() const;
-	int getMaxDays() const;
+	int getMonthDays() const;
 	int operator -(Date date) const;
 	bool isLeap;
 
