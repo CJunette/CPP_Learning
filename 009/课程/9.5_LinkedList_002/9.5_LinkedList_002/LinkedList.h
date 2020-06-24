@@ -252,7 +252,7 @@ void LinkedList<T>::insertBefore(const T &l)
         nNode = newNode(l, currPtr);
         prevPtr->insertAfter(nNode);
     }
-    //3.当currPtr为NULL时，说明现在在表尾位置。此时在当前位置之前插入结点，就相当于在链表的最后插入结点。因此需要改变position和rear。
+    //3.当currPtr为NULL时，说明现在在表尾位置（或者是之前的向空表插入结点）。此时在当前位置之前插入结点，就相当于在链表的最后插入结点。因此需要改变position和rear。
     if(currPtr == NULL)
     {
         position = size;
@@ -265,7 +265,7 @@ void LinkedList<T>::insertBefore(const T &l)
 template<class T>
 void LinkedList<T>::insertAfter(const T &l)
 {
-    Node<T> *p = new Node<T>(l);
+    Node<T> *p = newNode(l);
     //2.当front为NULL时，相当于插入空链表。
     if(front == NULL)
     {
