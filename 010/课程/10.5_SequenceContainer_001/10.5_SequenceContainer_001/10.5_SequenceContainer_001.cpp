@@ -1,4 +1,4 @@
-﻿// 10.5_OrderContainer_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// 10.5_SequenceContainer_001.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
@@ -24,7 +24,7 @@ void printContainer(const char *msg, const T &s)
     //1.1.接下来，即使通过构造函数，重新将那个int类型的数据变为deque<int>（在这里无法实现，但在自己执行“=”操作时可以），还是会有问题。因为ostream_iterator的对“=”的重载中，是通过“<<”运算符来实现输出的，而“<<”本身并没有以deque<int>对象为参数的重载。
     //1.1.此时会希望在主函数中重载“<<”运算符以解决问题。但到此会有一个无法解决的问题，如果在成员函数中调用运算符，则此时主函数中的运算符重载将无法影响那个函数中的运算符。由于“<<”是在运算符“=”的重载成员函数中的，因此无论在主函数中如何进行重载，都无法对其产生影响。    
     //1.2.[回答] 最为正确且快捷的做法是，将下面的模板参数写为<T::value_type>，也就是说，去获得deque<T>中的那个模板参数T所对应的类型，来作为ostream_iterator<T>的模板参数。
-    copy(s.begin(), s.end(), ostream_iterator<T::value_type>(cout, " "));    
+    copy(s.begin(), s.end(), ostream_iterator<T::value_type>(cout, " "));
     cout << endl;
 }
 
@@ -37,12 +37,12 @@ int main()
         cin >> x;
         //2.因为这里是用了push_front()，所以使得输入到s中的元素是以FILO的方式进行储存的。
         s.push_front(x);
-    }    
+    }
     printContainer("deque at first", s);
     //2.用deque的逆序对list进行初始化，就可以实现正向输出之前从键盘输入的元素。
     list<int> l(s.rbegin(), s.rend());
     printContainer("list at first", l);
-    
+
     //3.接下来是实现对list内的元素的两两互换。
     list<int>::iterator iter = l.begin();
     while(iter != l.end())
@@ -55,7 +55,7 @@ int main()
         l.insert(++iter, v);
     }
     printContainer("list after swap", l);
-    
+
     //4.s.assign()会在赋值之前，将容器内之前的元素都清除。
     s.assign(l.begin(), l.end());
     printContainer("deque at last", s);
