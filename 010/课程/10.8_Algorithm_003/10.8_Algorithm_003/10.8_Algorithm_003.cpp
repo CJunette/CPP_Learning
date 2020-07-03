@@ -63,7 +63,7 @@ int main()
     copy(v3.begin(), v3.end(), out);
     cout << endl << endl;
 
-    //以字典顺序比较序列v3和v4。
+    //以字典顺序比较序列v3和v4。返回第一个不同元素的位置。
     int arr3[] = { 1, 3, 5, 7, 1, 5, 9, 3 };
     vector<int> v4(arr3, arr3 + sizeof(arr3) / sizeof(int));
     cout << lexicographical_compare(v3.begin(), v3.end(), v4.begin(), v4.end()) << endl;
