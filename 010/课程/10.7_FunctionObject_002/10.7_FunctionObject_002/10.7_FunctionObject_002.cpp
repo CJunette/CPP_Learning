@@ -28,6 +28,8 @@ int main()
     //1.另外，这里也不能写成“MultClass<int>::operator()”（因为不能直接用成员函数名做参数  ）；
     //1.也不能写成“&MultClass<int>::operator()”或“&MultClass<int>()”（因为这两者的数据类型是指向类的成员函数的指针，与一般的函数指针的操作有所不同（算法是用一般指针的访问方式进行编写的）。
     //1.正确写法的“MultClass<int>()”的数据类型实际上是MultClass<int>，而非函数指针类型），也就是说，其实这里是用默认构造函数创建了个临时对象，传入了算法中。这个对象由编译器自动提供。使用类的形式提供的函数对象能比普通函数提供更多的额外信息。
+    //4.在学了函数适配器之后，我想用men_fun_ref来将成员函数MultClass<int>::operator()转变为函数对象，但似乎men_fun_ref只支持将无参数或只有一个参数的对象转换为一元或二元函数对象。
+    //4.对于二元函数似乎就没有办法处理了。
     cout << "The result by multipling all elements in a is " << accumulate(a, a + N, 1, MultClass<int>()) << "." << endl;
     /*
     cout << "The result by multipling all elements in a is " << accumulate(a, a + N, 1, m()) << "." << endl;
